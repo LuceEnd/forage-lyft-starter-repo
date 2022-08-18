@@ -1,11 +1,6 @@
-from car import Car
+from abc import ABC, abstractmethod
 
-class Servicable:
-    def __init__(self):
+class Servicable(ABC):
+    @abstractmethod
+    def needs_service(self):
         pass
-
-    """
-    Returns if a car needs servicing
-    """
-    def needs_service(Car):
-        return Car.needs_service()
