@@ -2,6 +2,8 @@ import unittest
 from datetime import datetime
 
 from car_factory import CarFactory
+from tire.carrigan_tire import CarriganTire
+from tire.octoprime_tire import OctoprimeTire
 
 
 class TestCalliope(unittest.TestCase):
@@ -189,6 +191,31 @@ class TestThovex(unittest.TestCase):
         car = CarFactory.create_thovex(today, last_service_date, current_mileage, last_service_mileage)
         self.assertFalse(car.needs_service())
 
+class TestCarrigan(unittest.TestCase):
+    def test_tire_should_be_serviced(self):
+        tire_sensor_list = [0.5, 0.9, 0.4, 0.5]
+
+        tire = CarriganTire(tire_sensor_list)
+        self.assertTrue(tire)
+
+    def test_tire_should_not_be_serviced(self):
+        tire_sensor_list = [0.1, 0.4, 0.1, 0.4]
+
+        tire = CarriganTire(tire_sensor_list)
+        self.assertFalse(tire)
+
+class TestOctoprime(unittest.TestCase):
+    def test_tire_should_be_serviced(self):
+        tire_sensor_list = [1, 1, 1, 0]
+
+        tire = OctoprimeTire(tire_sensor_list)
+        self.assertTrue(tire)
+
+    def test_tire_should_not_be_serviced(self):
+        tire_sensor_list = [0.1, 0.1, 0.1, 0.1]
+
+        tire = OctoprimeTire(tire_sensor_list)
+        self.assertFalse(tire)
 
 if __name__ == '__main__':
     unittest.main()
